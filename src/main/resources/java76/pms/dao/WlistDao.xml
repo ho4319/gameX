@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <resultMap type="wlist" id="wlistMap">
+    <result column="mno"    property="memberNo"/>
+    <result column="pno"    property="productNo"/>
+  </resultMap>
+  
+  <select id="selectList" resultMap="wlistMap" parameterType="map">
+    select pno 
+    from wlist
+    where mno
+    order by pno asc
+  </select> 
+  
+  <delete id="delete" parameterType="wlist">
+    delete from wlist where mno=#{memberNo} and pno={productNo}
+  </delete>
+  
+</mapper>

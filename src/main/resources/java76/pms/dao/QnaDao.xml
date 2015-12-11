@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="java76.pms.dao.QnaDao">
+
+  <resultMap type="qna" id="qnaMap">
+    <id 		column="qno" 		property="no"/>
+    <result column="cre_dt" 		property="createdDate"/>
+  </resultMap>
+
+  <select id="selectList" resultMap="qnaMap" parameterType="map">
+    select 
+      title,
+      qno,
+      writer,
+      cre_dt
+    from qna
+    order by qno desc 
+  </select>
+  
+  <insert id="insert" parameterType="qna">
+    insert into qna(title,text,cre_dt,writer) 
+    values(#{title},#{text},now(),#{writer})
+  </insert>
+  
+  <delete id="delete" parameterType="int">
+    delete from qna 
+  	where qno=#{no}
+  </delete>
+  
+  <update id="update" parameterType="qna">
+    update qna set 
+      title=#{title},
+      text=#{text},
+    where qno=#{no}
+  </update>
+  
+  <select id="selectOne" resultMap="qnaMap" parameterType="int">
+    select 
+      title,
+      text,
+      qno,
+      writer,
+      cre_dt,
+    from qna
+    where qno=#{no}
+  </select>
+  
+</mapper>

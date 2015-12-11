@@ -9,13 +9,23 @@ public class Sell implements Serializable {
   protected String style;
   protected int no;
   protected String photo;
+  protected String text;
   protected String title;
   
   public Sell() {};
   
   @Override
   public String toString() {
-    return "Sell [genre=" + genre + ", style=" + style + ", no=" + no + ", photo=" + photo + ", title=" + title + "]";
+    return "Sell [genre=" + genre + ", style=" + style + ", no=" + no + ", photo=" + photo + ", text=" + text
+        + ", title=" + title + "]";
+  }
+
+  public String getText() {
+    return text;
+  }
+
+  public void setText(String text) {
+    this.text = text;
   }
 
   public String getGenre() {

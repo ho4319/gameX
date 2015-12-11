@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="java76.pms.dao.SellDao">
+
+  <resultMap type="sell" id="sellMap">
+    <id 		column="pno" 		property="no"/>
+  </resultMap>
+
+  <select id="selectList" resultMap="sellMap" parameterType="map">
+    select 
+      title,
+      style,
+      genre
+    from sell
+    order by pno desc 
+    limit #{startIndex}, #{length}
+  </select>
+  
+  <insert id="insert" parameterType="sell">
+    insert into sell(title,text,photo,style,genre) 
+    values(#{title},#{text},#{photo},#{style},#{genre})
+  </insert>
+  
+  <delete id="delete" parameterType="int">
+    delete from sell 
+  	where pno=#{no}
+  </delete>
+  
+  <update id="update" parameterType="sell">
+    update sell set 
+      title=#{title},
+      text=#{text},
+      photo=#{photo},
+      style={style},
+      genre=#{genre}
+    where pno=#{no}
+  </update>
+  
+  <select id="selectOne" resultMap="sellMap" parameterType="int">
+    select 
+      title,
+      text,
+      photo,
+      pno,
+      style, 
+      genre
+    from sell
+    where pno=#{no}
+  </select>
+  
+</mapper>

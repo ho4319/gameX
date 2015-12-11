@@ -22,7 +22,6 @@ import java76.pms.util.MultipartHelper;
 @Controller
 @RequestMapping("/member/*")
 public class MemberController {
-  public static final String SAVED_DIR = "/file";
   
   @Autowired MemberDao memberDao;
   @Autowired ServletContext servletContext;
@@ -55,7 +54,7 @@ public class MemberController {
 
     if (photofile.getSize() > 0) {
       String newFileName = MultipartHelper.generateFilename(photofile.getOriginalFilename());  
-      File attachfile = new File(servletContext.getRealPath(SAVED_DIR) 
+      File attachfile = new File(servletContext.getRealPath("/mPhoto") 
                                  + "/" + newFileName);
       photofile.transferTo(attachfile);
       member.setPhoto(newFileName);
@@ -84,7 +83,7 @@ public class MemberController {
     if (photofile.getSize() > 0) {
       String newFileName = MultipartHelper.generateFilename(photofile.getOriginalFilename());  
       File attachfile = new File(
-          servletContext.getRealPath(SAVED_DIR) + "/" + newFileName);
+          servletContext.getRealPath("/mPhoto") + "/" + newFileName);
       photofile.transferTo(attachfile);
       member.setPhoto(newFileName);
     }

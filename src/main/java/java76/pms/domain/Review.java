@@ -13,11 +13,27 @@ public class Review  implements Serializable {
   protected int       reviewNo;
   protected int       memberNo;
   protected String    photo;
+  protected String    video;
   protected String    text;
   protected int       views;
   protected String    title;
   
   public Review() {};
+
+  @Override
+  public String toString() {
+    return "Review [genre=" + genre + ", style=" + style + ", createdDate=" + createdDate + ", writer=" + writer
+        + ", reviewNo=" + reviewNo + ", memberNo=" + memberNo + ", photo=" + photo + ", video=" + video + ", text="
+        + text + ", views=" + views + ", title=" + title + "]";
+  }
+
+  public String getVideo() {
+    return video;
+  }
+
+  public void setVideo(String video) {
+    this.video = video;
+  }
 
   public String getGenre() {
     return genre;
