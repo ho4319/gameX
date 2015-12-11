@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="java76.pms.dao.ContentDao">
+
+  <resultMap type="comment" id="commentMap">
+    <result column="rno" 		property="reviewNo"/>
+    <result column="mno" 		property="memberNo"/>
+    <result column="cre_dt"    property="createdDate"/>
+  </resultMap>
+
+  <select id="selectList" resultMap="commentMap" parameterType="map">
+    select 
+      text, cre_dt,      
+    from comment where rno
+    order by cre_dt desc 
+  </select>
+  
+  <insert id="insert" parameterType="comment">
+    insert into comment(text, cre_dt) 
+    values(#{text},now())
+  </insert>
+  
+  <delete id="delete" parameterType="comment">
+    delete from comment 
+  	where cre_dt=#{createdDate}
+  </delete>
+  
+  <update id="update" parameterType="comment">
+    update comment set 
+      text=#{text},
+      cre_dt=now()
+    where cre_dt=#{createdDate}
+  </update>
+  
+</mapper>
