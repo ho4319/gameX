@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="java76.pms.dao.ContentDao">
+
+  <resultMap type="content" id="contentMap">
+    <id 		column="cno" 		property="no"/>
+    <result column="cre_dt" 		property="createdDate"/>
+    <result column="afile" 		property="attachFile"/>
+  </resultMap>
+
+  <select id="selectList" resultMap="contentMap" parameterType="map">
+    select 
+      cno,
+      afile
+    from content
+    order by cno desc 
+    limit #{startIndex}, #{length}
+  </select>
+  
+   <select id="paging" resultMap="contentMap" parameterType="map">
+    select 
+      cno,
+      afile
+    from content
+  </select>
+  
+  <insert id="insert" parameterType="content">
+    insert into content(title,comment,cre_dt,afile,writer) 
+    values(#{title},#{comment},now(),#{attachFile},#{writer})
+  </insert>
+  
+  <delete id="delete" parameterType="int">
+    delete from content 
+  	where cno=#{no}
+  </delete>
+  
+  <update id="update" parameterType="content">
+    update content set 
+      title=#{title},
+      comment=#{comment},
+      cre_dt=now(),
+  	  afile=#{attachFile}
+    where cno=#{no}
+  </update>
+  
+  <update id="addViews" parameterType="int">
+    update content set 
+      views = views + 1
+    where cno=#{no}
+  </update>
+  
+  <select id="selectOne" resultMap="contentMap" parameterType="int">
+    select 
+      cno,
+      title,
+  	  comment,
+      views,
+      cre_dt,
+  	  afile,
+      writer 
+    from content
+    where cno=#{no}
+  </select>
+  
+  <select id="search" resultMap="contentMap" parameterType="int">
+    select
+      cno,
+      afile 
+    from content
+    where cno=#{no}
+  </select>
+  
+</mapper>

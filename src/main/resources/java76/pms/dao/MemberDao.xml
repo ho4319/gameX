@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="java76.pms.dao.MemberDao">
+	 <sql id="select_inc">
+    select id, name, addr, photo, email, tel, mno, grade
+  </sql>
+  
+  
+  <resultMap type="member" id="memberMap">
+    <id     column="mno"    property="no"/>
+    <result column="addr"    property="address"/>
+    <result column="pwd"    property="password"/>
+  </resultMap>
+  
+  <select id="selectList" resultMap="memberMap" parameterType="map">
+    <include refid="select_inc"/> 
+    from member
+    order by mno asc
+    limit #{startIndex}, #{length}
+  </select> 
+  
+	<insert id="insert" parameterType="member">
+		insert into member(id, name, addr, photo, email, tel, pwd)
+		values(#{id}, #{name}, #{address}, #{photo}, #{email}, #{tel}, sha1(#{password}))
+	</insert>
+  
+  <delete id="delete" parameterType="int">
+    delete from member where mno=#{no}
+  </delete>
+  
+  <update id="update" parameterType="member">
+    update student set
+      name=#{name},
+      addr=#{address},
+      photo=#{photo},
+      email=#{email},
+      tel=#{tel},
+      pwd=sha1(#{password})
+    where mno=#{no}
+  </update>
+  
+  <select id="selectOne" resultMap="memberMap" parameterType="int">
+    select 
+      mno,
+      id,
+      name,
+      addr,
+      photo,
+      email,
+      tel,
+      mno,
+      grade 
+    from member
+    where mno=#{no}
+  </select>
+
+	<select id="login" resultMap="memberMap" parameterType="map">
+		<include refid="select_inc"/> 
+		from member
+		where id=#{id} and pwd=sha1(#{password})
+	</select>
+</mapper>
