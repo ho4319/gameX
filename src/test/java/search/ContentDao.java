@@ -1,4 +1,4 @@
-/*
+/*package search;
 
 import java.util.List;
 import java.util.Map;
@@ -20,5 +20,5 @@ public interface ContentDao {
 
   Content selectOne(int no);
   
-  Content search(int no);
+  List<Content> search(Map<String,Object> paramMap);
 }*/
